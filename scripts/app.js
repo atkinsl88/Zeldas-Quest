@@ -1,5 +1,7 @@
 function init() {
 
+  // * Game
+
   // DOM Elements
   const grid = document.querySelector('.grid')
   const cells = []

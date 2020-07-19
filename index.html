@@ -6,12 +6,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/app.js" charset="utf-8"></script>
+    <script src="scripts/app2.js" charset="utf-8"></script>
+    <script src="scripts/app3.js" charset="utf-8"></script>
   </head>
   <body>
 
+    <div id="loader1" class="loader">
+      <img src="assets/zelda-quest-white.png" alt="">
+      <p>The Kingdom of Hyrule is under attack from the evil Calamity Gannon, who has taken over the divine beasts and guardians, turning them into evil death machines. Zelda, the princess of Hyrule is trapped in Hyrule Castle and needs saving. Help our hero, Link, free the evil from the divine beasts by travelling across Hyrule and defeating Calamity Gannon once and for all.</p>
+      <p>Use your keyboard to control link:</br><i>Down, Left and Right</i></p>
+      <button type="button" onclick="fadeOut()" class="loader-button">Start</button>
+    </div>
+
+    <div class="audio">
+      <a href="LandingPageURL"><img src="/assets/speaker.png" alt=""></a>
+    </div>
+
     <div class="heading-wrapper">
       <div class="heading">
-        <img src="/assets/zelda-quest.png" alt="">
+        <img src="assets/zelda-quest.png" alt="">
       </div>
     </div>
 
@@ -26,4 +39,12 @@
     </div>
 
   </body>
+
+  <script>
+  function fadeOut() {
+    const loader = document.querySelector('#loader1')
+    loader.style.opacity = '0'
+  }
+  </script>
+
 </html>
