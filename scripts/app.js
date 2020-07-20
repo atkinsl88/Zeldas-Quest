@@ -1,23 +1,5 @@
 function init() {
 
-  // * Sound
-
-  // const playBtn = document.querySelector('#play-btn')
-  // const audio = document.querySelector('#audio')
-  
-  // function playSound() {
-  //   audio.src = 'audio/main-theme.mp3'
-  //   audio.play()
-  // }
-  // playBtn.addEventListener('click', playSound)
-
-  // * Fade Out
-
-  // function fadeOut() {
-  //   const loader = document.querySelector('#loader1')
-  //   loader.style.opacity = '0'
-  // }
-
   // * Game
 
   // DOM Elements
@@ -34,13 +16,15 @@ function init() {
   let zeldaPosition = 4
   let enemyPosition = 0
   let randomEnemy = getRandomEnemyName()
+  let bonusPosition = 0
+  let randomBonus = getRandomBonusName()
 
   // Function - Link's Position
   function createGrid(linkPosition) {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      cell.innerHTML = i
+      // cell.innerHTML = i
       grid.appendChild(cell)
     }
     cells[linkPosition].classList.add('link')
@@ -80,7 +64,13 @@ function init() {
   // Function - Random Enememy
   function getRandomEnemyName() {
     const names = ['gannon', 'robot']
-    return names[Math.floor(Math.random() * name.length)]
+    return names[Math.floor(Math.random() * names.length)]
+  }
+
+  // Function - Random Bonus
+  function getRandomBonusName() {
+    const bonusNames = ['bonus', 'speaker']
+    return bonusNames[Math.floor(Math.random() * name.length)]
   }
 
   // Function = Game Logic
@@ -88,6 +78,9 @@ function init() {
     enemyPosition = Math.floor(Math.random() * 100)
     randomEnemy = getRandomEnemyName()
     cells[enemyPosition].classList.add(randomEnemy)
+    bonusPosition = Math.floor(Math.random() * 100)
+    randomBonus = getRandomBonusName()
+    cells[bonusPosition].classList.add(randomBonus)
   }
 
 
