@@ -46,6 +46,7 @@ span {
   width: 700px;
   line-height: 29px;
   text-align: center;
+  font-size: 16px;;
 }
 
 .loader img {
@@ -88,7 +89,7 @@ span {
 /* Heading Wrapper */
 
 .heading-wrapper {
-  height: 140px;
+  height: 80px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -110,7 +111,7 @@ span {
 /* Controls Wrapper */
 
 .controls-wrapper {
-  height: 100px;
+  height: 80px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
