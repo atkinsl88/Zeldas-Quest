@@ -165,8 +165,8 @@ span {
   cursor: pointer;
 }
 
-.grid div.machine {
-  background-image: url('../assets/machine.png');
+.grid div.robot {
+  background-image: url('../assets/robot.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;

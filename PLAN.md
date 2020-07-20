@@ -1,11 +1,9 @@
 # Project One: JavaScript
-[image:10D5D1CB-1A77-42E0-9E16-7D668DF9C1D8-4431-00000D6C3E425633/lQWzoAY_2AwcYXb0WuqNQom7GWfj5z8YfUQED4OsWGuTz7VgCpBKoixmwZAAY_rthZ8ANUmbu72KQKjHvXVS1TruIx-UmXXBZd33vLFzv4XgWlus5UMpjzHjZV_hyLApC_LPqiHZ.png]
-
 # JavaScript Technical Planning Document
-Project Name: Project One
-Description: Outline of my JavaScript approach
-Author: Liam Atkins
-Version: 001
+Project Name: Project One</br>
+Description: Outline of my JavaScript approach</br>
+Author: Liam Atkins</br>
+Version: 001</br>
 
 ## Part 1 - Making the grid layout and charchter 
 
@@ -351,9 +349,7 @@ You should be left with this, where Link can move freely.
 
 5. Then, add `audio.play()` underneath.
 
-```
-6. Outside of the function call an event listener called ‘click’ and include the function name playBtn.addEventListener(‘click’, playSound)
-```
+6. Outside of the function call an event listener called ‘click’ and include the function name `playBtn.addEventListener(‘click’, playSound)`
 
 This is what the code should look like:
 
@@ -371,3 +367,64 @@ This is what the code should look like:
 
   playBtn.addEventListener(‘click’, playSound)
 ```
+
+## Part 5 - Add Enemies and Zelda Positon
+
+1. Define a new variable for Gannon `let gannonPosition = 10`
+
+2. Create new function for Gannon’s position, and call the new variable.
+
+3. With the function, use the `classList` attribute to show Gannon based on his selected div, i.e. 10.
+
+```
+function gannonsPosition(gannonPosition) {
+	cells[gannonPosition].classList.add('gannon')
+}
+```
+
+4. Then, call that function under the createGrid(linkPosition) function.
+
+```
+gannonsPosition(gannonPosition)
+```
+
+5. Do the same for the Robot, Zelda and the extra life.
+
+You should have this under the Grid Value
+
+```
+  let linkPosition = 94
+  let zeldaPosition = 2
+  let gannonPosition = 10
+  let robotPosition = 20
+	let extraLifePosition = 45
+```
+
+```
+  // Function 3 - Zelda’s Position
+  function zeldasPosition(zeldaPosition) {
+    cells[zeldaPosition].classList.add(‘zelda’)
+  }
+
+  // Function 4 - Gannon’s Position
+  function gannonsPosition(gannonPosition) {
+    cells[gannonPosition].classList.add(‘gannon’)
+  }
+
+  // Function 5 - Robot’s Positon
+  function robotsPosition(robotPosition) {
+    cells[robotPosition].classList.add(‘robot’)
+  }
+
+  // Function 6 - Extra Life Positon
+  function extraLifesPosition(extraLifePosition) {
+    cells[extraLifePosition].classList.add('bonus')
+  }
+
+  createGrid(linkPosition) // This was written earlier
+  zeldasPosition(zeldaPosition)
+  gannonsPosition(gannonPosition)
+  robotsPosition(robotPosition)
+	extraLifesPosition(extraLifePosition)
+```
+

@@ -28,6 +28,10 @@ function init() {
   const width = 10
   const cellCount = width * width
   let linkPosition = 94
+  let zeldaPosition = 2
+  let gannonPosition = 10
+  let robotPosition = 20
+  let extraLifePosition = 45
 
   // Function 1 - Link's Position
   function createGrid(linkPosition) {
@@ -65,7 +69,31 @@ function init() {
     cells[linkPosition].classList.add('link') 
   }
 
+  // Function 3 - Zelda's Position
+  function zeldasPosition(zeldaPosition) {
+    cells[zeldaPosition].classList.add('zelda')
+  }
+
+  // Function 4 - Gannon's Position
+  function gannonsPosition(gannonPosition) {
+    cells[gannonPosition].classList.add('gannon')
+  }
+
+  // Function 5 - Robot's Positon
+  function robotsPosition(robotPosition) {
+    cells[robotPosition].classList.add('robot')
+  }
+
+  // Function 6 - Extra Life Positon
+  function extraLifesPosition(extraLifePosition) {
+    cells[extraLifePosition].classList.add('bonus')
+  }
+
   createGrid(linkPosition)
+  zeldasPosition(zeldaPosition)
+  gannonsPosition(gannonPosition)
+  robotsPosition(robotPosition)
+  extraLifesPosition(extraLifePosition)
 
   document.addEventListener('keyup', handleKeyUp)
 
