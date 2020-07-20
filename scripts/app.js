@@ -1,5 +1,23 @@
 function init() {
 
+  // * Sound
+
+  // const playBtn = document.querySelector('#play-btn')
+  // const audio = document.querySelector('#audio')
+  
+  // function playSound() {
+  //   audio.src = 'audio/main-theme.mp3'
+  //   audio.play()
+  // }
+  // playBtn.addEventListener('click', playSound)
+
+  // * Fade Out
+
+  // function fadeOut() {
+  //   const loader = document.querySelector('#loader1')
+  //   loader.style.opacity = '0'
+  // }
+
   // * Game
 
   // DOM Elements
@@ -9,9 +27,9 @@ function init() {
   // Grid Values
   const width = 10
   const cellCount = width * width
-  let linkPosition = 0
+  let linkPosition = 94
 
-  // Function 1
+  // Function 1 - Link's Position
   function createGrid(linkPosition) {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
@@ -21,7 +39,7 @@ function init() {
     cells[linkPosition].classList.add('link')
   }
 
-  // Function 2
+  // Function 2 - Link's Movement
   function handleKeyUp(event) {
 
     cells[linkPosition].classList.remove('link')

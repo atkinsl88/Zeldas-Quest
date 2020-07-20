@@ -68,16 +68,21 @@ span {
 
 /* Audio Wrapper */
 
-.audio {
+.audio-wrapper {
   display: flex;
   justify-content: flex-end;
   height: 50px;
 }
 
-.audio img {
+.audio-wrapper img {
   height: 20px;
   width: 20px;
   margin: 20px;
+}
+
+.audio-wrapper button {
+  border: none;
+  background-color: #F9F9F3;
 }
 
 /* Heading Wrapper */
