@@ -11,15 +11,21 @@ function init() {
   const width = 10
   const cellCount = width * width
   const enemyPositions = [10, 20, 30, 40, 50, 60, 70, 80]
+  const levelDisplay = document.querySelector('#level-display')
+  const livesDisplay = document.querySelector('#lives-display')
+  const pointsDisplay = document.querySelector('#point-display')
 
   // Game Variables
   let linkPosition = 94
-  const zeldaPosition = 3
+  let zeldaPosition = 3
   let enemyPosition = 0
   let totalEnemies = 0
   let randomEnemy = getRandomEnemyName()
   let bonusPosition = 0
   let randomBonus = getRandomBonusName()
+  let level = 1
+  let points = 0
+  let lives = 5
 
   // Function - Link's Position
   function createGrid(linkPosition) {
@@ -63,16 +69,21 @@ function init() {
       return cells[linkPosition].classList.remove('link') ||
       cells[linkPosition = 94].classList.add('link')
     }
+    livesDisplay.textContent = lives
 
     if (cells[linkPosition].classList.contains('bonus')) {
       console.log('you have been hit the bonus')
-      return cells[bonusPosition].classList.remove('bonus')
+      return cells[bonusPosition].classList.remove('bonus') ||
+      cells[bonusPosition = points += 1000].classList.contains('bonus')
     }
+    pointsDisplay.textContent = points
 
     if (cells[linkPosition].classList.contains('zelda')) {
       console.log('you win')
-      cells[zeldaPosition].classList.add('zeldaLink')
+      return cells[zeldaPosition].classList.add('zeldaLink') ||
+      cells[zeldaPosition = points += 5000].classList.contains('zelda')
     }
+    levelDisplay.textContent = level
 
   }
 
