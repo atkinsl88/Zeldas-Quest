@@ -60,10 +60,18 @@ function init() {
     if (cells[linkPosition].classList.contains('gannon') || 
         cells[linkPosition].classList.contains('robot')) {
       console.log('you have been hit')
+      return cells[linkPosition].classList.remove('link') ||
+      cells[linkPosition = 94].classList.add('link')
     }
 
     if (cells[linkPosition].classList.contains('bonus')) {
       console.log('you have been hit the bonus')
+      return cells[bonusPosition].classList.remove('bonus')
+    }
+
+    if (cells[linkPosition].classList.contains('zelda')) {
+      console.log('you win')
+      cells[zeldaPosition].classList.add('zeldaLink')
     }
 
   }
