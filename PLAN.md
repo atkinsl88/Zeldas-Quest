@@ -5,7 +5,7 @@ Description: Outline of my JavaScript approach</br>
 Author: Liam Atkins</br>
 Version: 001</br>
 
-## Part 1 - Making the grid layout and charchter 
+## Part 1 - Making the grid layout and character 
 
 ### Creating the grid layout
 
@@ -428,3 +428,171 @@ You should have this under the Grid Value
 	extraLifesPosition(extraLifePosition)
 ```
 
+### Generate random enemy at any position 
+
+1. First, I need a const to define the item.
+```
+let randomEnemy = getRandomEnemyName()
+```
+
+2. Second, I need a function to handle the movement.
+```
+function getRandomEnemyName() {
+}
+```
+
+3. Third, I need to random pick an enemy from an object, so I can define a variable inside of the new function. And then use a return to randomly show an enemy.
+```
+function getRandomEnemyName() {
+	const names = ['gannon', 'robot']
+	return names[Math.floor(Math.random() * name.length)]
+}
+```
+
+4. Then, I need to create a function for my game to start, and in that function I need to add the currentClass = getRandomEnemyName()
+```
+function startGame() {
+	let currentClass = getRandomEnemyName()
+	console.log(currentClass)
+}
+```
+
+5. Then, I need to add an eventListener, so that when the start button is click on the pre-loader, the game will start.
+```
+start.addEventListener(‘click’, startGame)
+```
+
+6. In similar to the const grid in my DOM Element, I need to define a variable to executer my button.
+```
+const start = document.querySelector('#loader-btn')
+```
+
+7. Then define the enemyPosition on my Game Variables
+```
+let enemyPosition = 0
+```
+
+8. Then add
+	1. `randomEnemy = getRandomEnemyName()`, to call the new variable
+	2. `cells[enemyPosition].classList.add(randomEnemy)`,  to call the randomEnemy and enemyPosition variable
+	3. `enemyPosition = Math.floor(Math.random() * 100)`, to randomly fire a random enemy
+
+You should have this:
+```
+  // Function = Game Logic
+  function startGame() {
+    enemyPosition = Math.floor(Math.random() * 100)
+    randomEnemy = getRandomEnemyName()
+    cells[enemyPosition].classList.add(randomEnemy)
+  }
+
+```
+
+### Generate random item at any position 
+
+1. First, I need a const to define the item and bonus position
+```
+let bonusPosition = 0
+let randomBonus = getRandomBonusName()
+```
+
+2. Second, I need a function to handle the movement.
+```
+function getRandomBonusName() {
+}
+```
+
+3. Third, I need to random pick an item from an object, so I can define a variable inside of the new function. And then use a return to randomly show an enemy.
+```
+function getRandomBonusName() {
+	const bonusNames = ['bonus', 'speaker']
+	return bonusNames[Math.floor(Math.random() * name.length)]
+}
+```
+
+4. Then add, as we did previously but update the variables
+	1.  `randomEnemy = getRandomEnemyName()`, to call the new variable
+	2. `cells[enemyPosition].classList.add(randomEnemy)`,  to call the randomEnemy and enemyPosition variable
+	3. `enemyPosition = Math.floor(Math.random() * 100)`, to randomly fire a random enemy
+
+You should have this:
+```
+  // Function = Game Logic
+  function startGame() {
+    enemyPosition = Math.floor(Math.random() * 100)
+    randomEnemy = getRandomEnemyName()
+    cells[enemyPosition].classList.add(randomEnemy)
+    bonusPosition = Math.floor(Math.random() * 100)
+    randomBonus = getRandomBonusName()
+    cells[bonusPosition].classList.add(randomBonus)
+  }
+
+
+```
+
+### Generate random enemies at on specific grid locations, I.e 10,20,30,40,50,60,70,80.
+
+1. Get a random number between *min* and *max* value using below method:
+
+```
+Math.floor(Math.random() * (max - min) + min)
+```
+
+2. Then, I want any random number between 0 and 9. So, min value would be 1 and max value would be 9 (because I am using Math.floor).  After that multiply the number I have with 10 and I should get the output. Any random number from 10,20,30,40,50,60,70,80.
+
+```
+    enemyPosition = (Math.floor(Math.random() * (9 - 1) + 1)) * 10
+    randomEnemy = getRandomEnemyName()
+    cells[enemyPosition].classList.add(randomEnemy)
+```
+
+Working on my interval (or loop) - Part 1 (Getting multiples to appear)
+
+1. Define a new variable within my `startGame()` function, and add the setInterval parameters.
+```
+const timer = setInterval(() => {
+})
+```
+
+2. Declare a new variable called totalEnemies in my Game Variables section
+```
+let totalEnemies = 0
+```
+
+3. Open an ‘if’ statement, and inside include a parenthesis, which has the new variable > 9, because we there are 10 squares across my grid that I want the enemy to move across, and 0 counts.
+4. Then, add clearInterval(time) 
+```
+const timer = setInterval(() => {
+	if (totalEnemies > 9) {
+	 clearInterval(time) 
+	 cells[enemyPosition].classList.remove(randomEnemy)
+	 alert(score)
+	 return
+	}
+	totalEnemies++
+})
+```
+
+5. Then, move the bonusPosition out of the if statement and place underneath like this.
+```
+  // Function = Game Logic
+  function startGame() {
+    const timer = setInterval(() => {
+      if (totalEnemies > 9) {
+        clearInterval(time) 
+        cells[enemyPosition].classList.remove(randomEnemy)
+        alert(score)
+        return
+      }
+      totalEnemies++
+      enemyPosition = (Math.floor(Math.random() * (9 - 1) + 1)) * 10
+      randomEnemy = getRandomEnemyName()
+      cells[enemyPosition].classList.add(randomEnemy)
+    }, 1000)
+    bonusPosition = Math.floor(Math.random() * 100)
+    randomBonus = getRandomBonusName()
+    cells[bonusPosition].classList.add(randomBonus)
+  }
+```
+
+Enemies should appear randomly on the left hand side, and you should have one bonus item appear.

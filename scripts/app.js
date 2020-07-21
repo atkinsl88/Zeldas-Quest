@@ -13,8 +13,9 @@ function init() {
 
   // Game Variables
   let linkPosition = 94
-  let zeldaPosition = 4
+  let zeldaPosition = 3
   let enemyPosition = 0
+  let totalEnemies = 0
   let randomEnemy = getRandomEnemyName()
   let bonusPosition = 0
   let randomBonus = getRandomBonusName()
@@ -75,9 +76,18 @@ function init() {
 
   // Function = Game Logic
   function startGame() {
-    enemyPosition = Math.floor(Math.random() * 100)
-    randomEnemy = getRandomEnemyName()
-    cells[enemyPosition].classList.add(randomEnemy)
+    const timer = setInterval(() => {
+      if (totalEnemies > 9) {
+        clearInterval(time) 
+        cells[enemyPosition].classList.remove(randomEnemy)
+        alert(score)
+        return
+      }
+      totalEnemies++
+      enemyPosition = (Math.floor(Math.random() * (9 - 1) + 1)) * 10
+      randomEnemy = getRandomEnemyName()
+      cells[enemyPosition].classList.add(randomEnemy)
+    }, 1000)
     bonusPosition = Math.floor(Math.random() * 100)
     randomBonus = getRandomBonusName()
     cells[bonusPosition].classList.add(randomBonus)
