@@ -10,6 +10,7 @@ function init() {
   // Grid Values
   const width = 10
   const cellCount = width * width
+  const enemyPositions = [10, 20, 30, 40, 50, 60, 70, 80]
 
   // Game Variables
   let linkPosition = 94
@@ -25,7 +26,7 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      // cell.innerHTML = i
+      cell.innerHTML = i
       grid.appendChild(cell)
     }
     cells[linkPosition].classList.add('link')
@@ -52,7 +53,7 @@ function init() {
         if (y < width - 1) linkPosition += width
         break
       default:
-        console.log('invalid key do nothing') 
+        console.log('Do nothing') 
     }
     cells[linkPosition].classList.add('link') 
   }
@@ -74,31 +75,64 @@ function init() {
     return bonusNames[Math.floor(Math.random() * name.length)]
   }
 
-  // Function = Game Logic
+  // Function - Create Enemies
+  function createEnemies() {
+    // enemyPosition = (Math.floor(Math.random() * (9 - 1) + 1)) * 10
+    randomEnemy = getRandomEnemyName()
+    enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.add(randomEnemy))
+  }
+
+  // Function - Game Logic
   function startGame() {
     const timer = setInterval(() => {
-      if (totalEnemies > 9) {
-        clearInterval(time) 
-        cells[enemyPosition].classList.remove(randomEnemy)
-        alert(score)
-        return
-      }
+      // if (totalEnemies > 10) {
+      //   clearInterval(timer) 
+      //   cells[enemyPosition].classList.remove(randomEnemy)
+      //   // alert(score)
+      // }
+      enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.remove(randomEnemy))
+      enemyPosition = enemyPosition + 1
+      createEnemies()
       totalEnemies++
-      enemyPosition = (Math.floor(Math.random() * (9 - 1) + 1)) * 10
-      randomEnemy = getRandomEnemyName()
-      cells[enemyPosition].classList.add(randomEnemy)
     }, 1000)
+    createEnemies()
     bonusPosition = Math.floor(Math.random() * 100)
     randomBonus = getRandomBonusName()
     cells[bonusPosition].classList.add(randomBonus)
   }
 
+  // Function - Collision Logic
+  function collisionLogic(collide) {
+    const linkReset = linkPosition - linkPosition
+    switch (collide) {
+      case 'link collide':
+        if (linkPosition === enemyPosition)
+          console.log('Collision!') 
+        linkReset
+        break
+      default:
+        console.log('No collision') 
+    }
+  }
 
   createGrid(linkPosition)
   start.addEventListener('click', startGame)
+  collisionLogic()
   zeldasPosition(zeldaPosition)
 
   document.addEventListener('keyup', handleKeyUp)
+
+
+  // * Audio
+
+  const playBtn = document.querySelector('#play-btn')
+  const audio = document.querySelector('#audio')
+  
+  function playSound() {
+    audio.src = 'audio/main-theme.mp3'
+    audio.play()
+  }
+  playBtn.addEventListener('click', playSound)
 
 }
 window.addEventListener('DOMContentLoaded', init)
