@@ -39,20 +39,22 @@ span {
   opacity: 1;
 }
 
+.loader-text {
+  width: 750px;
+}
+
 .loader p {
   font-family: 'Cinzel', serif;
   font-weight: 400;
   color: #ffffff;
-  width: 700px;
   line-height: 29px;
   text-align: center;
-  font-size: 16px;;
+  font-size: 14px;;
 }
 
 .loader img {
   width: auto;
   height: 140px;
-  margin: 40px;
 }
 
 .loader-button {
@@ -69,21 +71,32 @@ span {
 
 /* Audio Wrapper */
 
-.audio-wrapper {
+.twoCol {
   display: flex;
-  justify-content: flex-end;
-  height: 50px;
+  flex-direction: row;
+  max-height: 100px
 }
 
-.audio-wrapper img {
-  height: 20px;
-  width: 20px;
-  margin: 20px;
+.twoCol-text {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
 }
 
-.audio-wrapper button {
+.twoCol-audio {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.twoCol-audio img {
+  height: 24px;
+  width: 24px;
+}
+
+.twoCol-audio button {
   border: none;
-  background-color: #F9F9F3;
+  background-color: #000000;
 }
 
 /* Heading Wrapper */

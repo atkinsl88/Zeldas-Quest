@@ -9,15 +9,21 @@
   </head>
   <body>
 
-    <div class="audio-wrapper">
-      <audio id="audio"></audio>
-      <button type="button" id="play-btn"><img src="/assets/speaker.png" alt=""></button>
-    </div>
-
     <div id="loader1" class="loader">
       <img src="assets/zelda-quest-white.png" alt="">
-      <p>The Kingdom of Hyrule is under attack from the evil Calamity Gannon, who has taken over the divine beasts and guardians, turning them into evil death machines. Zelda, the princess of Hyrule is trapped in Hyrule Castle and needs saving. Help our hero, Link, free the evil from the divine beasts by travelling across Hyrule and defeating Calamity Gannon once and for all.</p>
-      <p>Use your keyboard to control link:</br><i>Down, Left and Right</i></p>
+      <p class="loader-text">The Kingdom of Hyrule is under attack from the evil Calamity Gannon, who has taken over the divine beasts and guardians, turning them into evil death machines. Zelda, the princess of Hyrule is trapped in Hyrule Castle and needs saving. Help our hero, Link, free the evil from the divine beasts by travelling across Hyrule and defeating Calamity Gannon once and for all.</p>
+      
+      <div class="twoCol">
+        <div class="twoCol-text">
+          <p>Use your keyboard to control link:</br><b>Down, Left and Right</b></p>
+        </div>
+        <div class="twoCol-audio">
+          <p>Don't forget to add the sound</p>
+          <button id="play-btn"><img src="/assets/speaker.png" alt=""></button>
+          <audio id="audio"></audio>
+        </div>
+      </div>
+
       <button id='loader-btn' type="button" onclick="fadeOut()" class="loader-button">Start</button>
     </div>
 

@@ -14,7 +14,7 @@ function init() {
 
   // Game Variables
   let linkPosition = 94
-  let zeldaPosition = 3
+  const zeldaPosition = 3
   let enemyPosition = 0
   let totalEnemies = 0
   let randomEnemy = getRandomEnemyName()
@@ -26,7 +26,7 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      cell.innerHTML = i
+      // cell.innerHTML = i
       grid.appendChild(cell)
     }
     cells[linkPosition].classList.add('link')
@@ -55,7 +55,17 @@ function init() {
       default:
         console.log('Do nothing') 
     }
-    cells[linkPosition].classList.add('link') 
+    cells[linkPosition].classList.add('link')
+
+    if (cells[linkPosition].classList.contains('gannon') || 
+        cells[linkPosition].classList.contains('robot')) {
+      console.log('you have been hit')
+    }
+
+    if (cells[linkPosition].classList.contains('bonus')) {
+      console.log('you have been hit the bonus')
+    }
+
   }
 
   // Function - Zelda's Position
@@ -101,23 +111,8 @@ function init() {
     cells[bonusPosition].classList.add(randomBonus)
   }
 
-  // Function - Collision Logic
-  function collisionLogic(collide) {
-    const linkReset = linkPosition - linkPosition
-    switch (collide) {
-      case 'link collide':
-        if (linkPosition === enemyPosition)
-          console.log('Collision!') 
-        linkReset
-        break
-      default:
-        console.log('No collision') 
-    }
-  }
-
   createGrid(linkPosition)
   start.addEventListener('click', startGame)
-  collisionLogic()
   zeldasPosition(zeldaPosition)
 
   document.addEventListener('keyup', handleKeyUp)
@@ -132,7 +127,9 @@ function init() {
     audio.src = 'audio/main-theme.mp3'
     audio.play()
   }
+
   playBtn.addEventListener('click', playSound)
+  console.log(playSound, 'called!')
 
 }
 window.addEventListener('DOMContentLoaded', init)
