@@ -12,7 +12,7 @@ function init() {
   const cellCount = width * width
   const enemyPositions = [10, 20, 30, 40, 50, 60, 70, 80]
   const levelDisplay = document.querySelector('#level-display')
-  const livesDisplay = document.querySelector('#lives-display')
+  const livesDisplay = document.querySelector('#life-display')
   const pointsDisplay = document.querySelector('#point-display')
 
   // Game Variables
@@ -23,7 +23,7 @@ function init() {
   let randomEnemy = getRandomEnemyName()
   let bonusPosition = 0
   let randomBonus = getRandomBonusName()
-  let level = 1
+  let levels = 1
   let points = 0
   let lives = 5
 
@@ -67,23 +67,26 @@ function init() {
         cells[linkPosition].classList.contains('robot')) {
       console.log('you have been hit')
       return cells[linkPosition].classList.remove('link') ||
+      cells[linkPosition = lives -= 1].classList.contains('gannon', 'robot') ||
       cells[linkPosition = 94].classList.add('link')
     }
-    livesDisplay.textContent = lives
 
     if (cells[linkPosition].classList.contains('bonus')) {
       console.log('you have been hit the bonus')
       return cells[bonusPosition].classList.remove('bonus') ||
       cells[bonusPosition = points += 1000].classList.contains('bonus')
     }
-    pointsDisplay.textContent = points
 
     if (cells[linkPosition].classList.contains('zelda')) {
       console.log('you win')
       return cells[zeldaPosition].classList.add('zeldaLink') ||
-      cells[zeldaPosition = points += 5000].classList.contains('zelda')
+      cells[zeldaPosition = points += 5000].classList.contains('zelda') ||
+      cells[linkPosition = levels += 1].classList.contains('zelda')
     }
-    levelDisplay.textContent = level
+
+    pointsDisplay.textContent = points
+    livesDisplay.textContent = lives
+    levelDisplay.textContent = levels
 
   }
 
