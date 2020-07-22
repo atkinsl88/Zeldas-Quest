@@ -1,13 +1,11 @@
 function init() {
 
-  // * Game
-
-  // DOM Elements
+  // * DOM Elements
   const grid = document.querySelector('.grid')
   const start = document.querySelector('#loader-btn')
   const cells = []
 
-  // Grid Values
+  // * Grid Values
   const width = 10
   const cellCount = width * width
   const enemyPositions = [10, 20, 30, 40, 50, 60, 70, 80]
@@ -15,7 +13,7 @@ function init() {
   const livesDisplay = document.querySelector('#life-display')
   const pointsDisplay = document.querySelector('#point-display')
 
-  // Game Variables
+  // * Game Variables
   let linkPosition = 94
   let zeldaPosition = 3
   let enemyPosition = 0
@@ -28,6 +26,7 @@ function init() {
   let points = 0
   let timer = null
 
+  // * Functions for charchters, enemies and items
   // Function - Link's Position
   function createGrid(linkPosition) {
     for (let i = 0; i < cellCount; i++) {
@@ -45,7 +44,6 @@ function init() {
     cells[linkPosition].classList.remove('link')
     const x = linkPosition % width
     const y = Math.floor(linkPosition / width)
-
     switch (event.keyCode) { 
       case 39: 
         if (x < width - 1) linkPosition++
@@ -63,7 +61,6 @@ function init() {
         console.log('Do nothing') 
     }
     cells[linkPosition].classList.add('link')
-
     if (hasEnemy()) {
       console.log('you have been hit')
       removeLink()
@@ -71,13 +68,11 @@ function init() {
       linkPosition = 94
       addLink()
     }
-
     if (cells[linkPosition].classList.contains('bonus')) {
       console.log('you have been hit the bonus')
       removeBonus()
       addPoints(1000)
     }
-
     if (cells[linkPosition].classList.contains('zelda')) {
       console.log('you win')
       addPoints(5000)
@@ -89,21 +84,20 @@ function init() {
       addLink()
     }
 
+    // * If statements for winning or loosing
     if (levels === 6) {
       alert('You win!', levels)
     }
-
     if (lives === 0) {
       console.log('Game over')
       alert('Game over!', lives)
     }
-
     levelsDisplay.textContent = levels
     livesDisplay.textContent = lives
     pointsDisplay.textContent = points
-
   }
 
+  // * Functions for Collision Logic
   // Function - Add Link
   function addLink() {
     cells[linkPosition].classList.add('link')
@@ -112,6 +106,13 @@ function init() {
   // Function - Remove Link
   function removeLink() {
     cells[linkPosition].classList.remove('link')
+  }
+
+  // Function - Random Bonus
+  function randomBonusPosition() {
+    bonusPosition = Math.floor(Math.random() * 100)
+    randomBonus = getRandomBonusName()
+    cells[bonusPosition].classList.add(randomBonus)
   }
 
   // Function - Add Bonus
@@ -164,40 +165,66 @@ function init() {
     return bonusNames[Math.floor(Math.random() * name.length)]
   }
 
+  // * Functions for Enemy Movement
+  // Function - Remove Enemies + 1
+  function removeEnemies() {
+    enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.remove(randomEnemy))
+  }
+
+  // Function - Add Enemies
+  function addEnemies() {
+    if (totalEnemies > 7) {
+      clearInterval(timer) 
+      cells[enemyPosition].classList.remove(randomEnemy)
+    }
+  }
+
   // Function - Create Enemies
   function createEnemies() {
-    // enemyPosition = (Math.floor(Math.random() * (9 - 1) + 1)) * 10
     randomEnemy = getRandomEnemyName()
     enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.add(randomEnemy))
   }
 
-  // Function - Game Logic
-  function startGame() {
+  // Function - Stop Enemies
+  function stopEnemies() {
+    totalEnemies++
+  }
+
+  // Function - Repeat Enemies
+  function repeatEnemies() {
+    clearInterval(timer)
+  }
+
+  function moveEnemies() {
     timer = setInterval(() => {
-      // if (totalEnemies > 10) {
-      //   clearInterval(timer) 
-      //   cells[enemyPosition].classList.remove(randomEnemy)
-      // }
-      enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.remove(randomEnemy))
+      removeEnemies()
       enemyPosition = enemyPosition + 1
       createEnemies()
       totalEnemies++
+      if (totalEnemies === 9) {
+        clearInterval(timer)
+        totalEnemies = 0
+        moveEnemies()
+      }
     }, 1000)
-    createEnemies()
-    bonusPosition = Math.floor(Math.random() * 100)
-    randomBonus = getRandomBonusName()
-    cells[bonusPosition].classList.add(randomBonus)
   }
 
-  createGrid(linkPosition)
-  start.addEventListener('click', startGame)
-  zeldasPosition(zeldaPosition)
+  // * Functions for Game Logic
+  // Function - Enemy Logics
+  function gameLogic() {
+    moveEnemies()
+    createEnemies()
+    randomBonusPosition()
+  }
 
+  // * Listeners
+  createGrid(linkPosition)
+  zeldasPosition(zeldaPosition)
+  start.addEventListener('click', gameLogic)
   document.addEventListener('keyup', handleKeyUp)
 
 
   // * Audio
-
   const playBtn = document.querySelector('#play-btn')
   const audio = document.querySelector('#audio')
   
@@ -206,7 +233,20 @@ function init() {
     audio.play()
   }
 
+  // Audio Listener
   playBtn.addEventListener('click', playSound)
+
+  const loaderBtn = document.querySelector('#loader-btn')
+  const loader = document.querySelector('#loader1')
+
+
+  // * Fade Out
+  function fadeOut() {
+    loader.style.opacity = '0'
+  }
+
+  // Fade Out Listner
+  loaderBtn.addEventListener('click', fadeOut)
 
 }
 window.addEventListener('DOMContentLoaded', init)
