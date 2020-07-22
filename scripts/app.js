@@ -84,17 +84,26 @@ function init() {
       addLink()
     }
 
-    // * If statements for winning or loosing
-    if (levels === 6) {
-      alert('You win!', levels)
-    }
-    if (lives === 0) {
-      console.log('Game over')
-      alert('Game over!', lives)
-    }
+    gameWin()
+    gameLoose()
     levelsDisplay.textContent = levels
     livesDisplay.textContent = lives
     pointsDisplay.textContent = points
+  }
+
+  // * Winning or loosing function
+  // Game win
+  function gameWin() {
+    if (levels === 6) {
+      winFadeIn()
+    }
+  }
+
+  // Game loose
+  function gameLoose() {
+    if (lives === 0) {
+      looseFadeIn()
+    }
   }
 
   // * Functions for Collision Logic
@@ -196,14 +205,17 @@ function init() {
   }
 
   function moveEnemies() {
+    enemyPosition = 0
     timer = setInterval(() => {
       removeEnemies()
       enemyPosition = enemyPosition + 1
       createEnemies()
       totalEnemies++
-      if (totalEnemies === 9) {
+      console.log('enemyPosition moving', enemyPosition)
+      if (totalEnemies === 10) {
         clearInterval(timer)
         totalEnemies = 0
+        cells.forEach(cell => cell.classList.remove('gannon', 'robot'))
         moveEnemies()
       }
     }, 1000)
@@ -236,17 +248,45 @@ function init() {
   // Audio Listener
   playBtn.addEventListener('click', playSound)
 
+  // * Fade Out
   const loaderBtn = document.querySelector('#loader-btn')
   const loader = document.querySelector('#loader1')
 
-
-  // * Fade Out
   function fadeOut() {
     loader.style.opacity = '0'
   }
 
   // Fade Out Listner
   loaderBtn.addEventListener('click', fadeOut)
+
+
+  // * Win Fade In
+  // Fade In Variable
+  const winFade = document.querySelector('#win1')
+
+  // Fade In Function
+  function winFadeIn() {
+    if (gameWin === gameWin) {
+      winFade.style.opacity = '1'
+    }
+  }
+
+  // * Loose Fade In
+  // Fade In Variable
+  const looseFade = document.querySelector('#loose1')
+
+  // Fade In Function
+  function looseFadeIn() {
+    if (gameLoose === gameLoose) {
+      looseFade.style.opacity = '1'
+    }
+  }
+  
+  // Fade In Listner
+  winFade.addEventListener(winFadeIn)
+  looseFade.addEventListener(looseFadeIn)
+  
+
 
 }
 window.addEventListener('DOMContentLoaded', init)
