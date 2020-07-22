@@ -11,7 +11,7 @@ function init() {
   const width = 10
   const cellCount = width * width
   const enemyPositions = [10, 20, 30, 40, 50, 60, 70, 80]
-  const levelDisplay = document.querySelector('#level-display')
+  const levelsDisplay = document.querySelector('#level-display')
   const livesDisplay = document.querySelector('#life-display')
   const pointsDisplay = document.querySelector('#point-display')
 
@@ -24,8 +24,9 @@ function init() {
   let bonusPosition = 0
   let randomBonus = getRandomBonusName()
   let levels = 1
-  let points = 0
   let lives = 5
+  let points = 0
+  let timer = null
 
   // Function - Link's Position
   function createGrid(linkPosition) {
@@ -63,31 +64,87 @@ function init() {
     }
     cells[linkPosition].classList.add('link')
 
-    if (cells[linkPosition].classList.contains('gannon') || 
-        cells[linkPosition].classList.contains('robot')) {
+    if (hasEnemy()) {
       console.log('you have been hit')
-      return cells[linkPosition].classList.remove('link') ||
-      cells[linkPosition = lives -= 1].classList.contains('gannon', 'robot') ||
-      cells[linkPosition = 94].classList.add('link')
+      removeLink()
+      removeLife()
+      linkPosition = 94
+      addLink()
     }
 
     if (cells[linkPosition].classList.contains('bonus')) {
       console.log('you have been hit the bonus')
-      return cells[bonusPosition].classList.remove('bonus') ||
-      cells[bonusPosition = points += 1000].classList.contains('bonus')
+      removeBonus()
+      addPoints(1000)
     }
 
     if (cells[linkPosition].classList.contains('zelda')) {
       console.log('you win')
-      return cells[zeldaPosition].classList.add('zeldaLink') ||
-      cells[zeldaPosition = points += 5000].classList.contains('zelda') ||
-      cells[linkPosition = levels += 1].classList.contains('zelda')
+      addPoints(5000)
+      addLevel()
+      removeLink()
+      removeBonus()
+      linkPosition = 94
+      addBonus()
+      addLink()
     }
 
-    pointsDisplay.textContent = points
-    livesDisplay.textContent = lives
-    levelDisplay.textContent = levels
+    if (levels === 6) {
+      alert('You win!', levels)
+    }
 
+    if (lives === 0) {
+      console.log('Game over')
+      alert('Game over!', lives)
+    }
+
+    levelsDisplay.textContent = levels
+    livesDisplay.textContent = lives
+    pointsDisplay.textContent = points
+
+  }
+
+  // Function - Add Link
+  function addLink() {
+    cells[linkPosition].classList.add('link')
+  }
+
+  // Function - Remove Link
+  function removeLink() {
+    cells[linkPosition].classList.remove('link')
+  }
+
+  // Function - Add Bonus
+  function addBonus() {
+    cells[bonusPosition].classList.add('bonus')
+  }
+
+  // Function - Remove Bonus
+  function removeBonus() {
+    cells[bonusPosition].classList.remove('bonus')
+  }
+
+  // Function - Update Points
+  function addPoints(amount) {
+    points += amount
+    pointsDisplay.innerHTML = points
+  }
+
+  // Function - Update Level
+  function addLevel() {
+    levels++ 
+    levelsDisplay.innerHTML = levels
+  }
+
+  // Function - Remove Life
+  function removeLife() {
+    lives--
+    livesDisplay.innerHTML = lives
+  }
+
+  // Function - Has Enemy
+  function hasEnemy() {
+    return cells[linkPosition].classList.contains('gannon') || cells[linkPosition].classList.contains('robot')
   }
 
   // Function - Zelda's Position
@@ -116,11 +173,10 @@ function init() {
 
   // Function - Game Logic
   function startGame() {
-    const timer = setInterval(() => {
+    timer = setInterval(() => {
       // if (totalEnemies > 10) {
       //   clearInterval(timer) 
       //   cells[enemyPosition].classList.remove(randomEnemy)
-      //   // alert(score)
       // }
       enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.remove(randomEnemy))
       enemyPosition = enemyPosition + 1
@@ -151,7 +207,6 @@ function init() {
   }
 
   playBtn.addEventListener('click', playSound)
-  console.log(playSound, 'called!')
 
 }
 window.addEventListener('DOMContentLoaded', init)

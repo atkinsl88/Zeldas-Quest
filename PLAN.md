@@ -596,3 +596,28 @@ const timer = setInterval(() => {
 ```
 
 Enemies should appear randomly on the left hand side, and you should have one bonus item appear.
+
+# Part 6 - Collision Logic
+### 1. Create this logic to make the item interact 
+ 
+```
+  if (cells[linkPosition].classList.contains(‘gannon’) || 
+        cells[linkPosition].classList.contains(‘robot’)) {
+      console.log(‘you have been hit’)
+      return cells[linkPosition].classList.remove(‘link’) ||
+      cells[linkPosition = lives -= 1].classList.contains(‘gannon’, ‘robot’) ||
+      cells[linkPosition = 94].classList.add(‘link’)
+    }
+
+    if (cells[linkPosition].classList.contains(‘bonus’)) {
+      console.log(‘you have been hit the bonus’)
+      return cells[bonusPosition].classList.remove(‘bonus’) ||
+      cells[bonusPosition = points += 1000].classList.contains(‘bonus’)
+    }
+
+    if (cells[linkPosition].classList.contains(‘zelda’)) {
+      console.log(‘you win’)
+      return cells[zeldaPosition].classList.add(‘zeldaLink’) ||
+      cells[zeldaPosition = points += 5000].classList.contains(‘zelda’) 
+      // cells[zeldaPosition = levels += 1].classList.contains(‘zelda’)
+```
