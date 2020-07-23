@@ -215,7 +215,7 @@ span {
 .win {
   position: fixed;
   z-index: 99;
-  top: 23%;
+  top: 19%;
   left: 37%;
   width: 660px;
   height: 40%;
@@ -260,7 +260,7 @@ span {
 .loose {
   position: fixed;
   z-index: 99;
-  top: 23%;
+  top: 19%;
   left: 37%;
   width: 660px;
   height: 40%;

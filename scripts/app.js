@@ -80,7 +80,7 @@ function init() {
       removeLink()
       removeBonus()
       linkPosition = 94
-      addBonus()
+      randomBonusPosition()
       addLink()
     }
 
@@ -96,6 +96,9 @@ function init() {
   function gameWin() {
     if (levels === 6) {
       winFadeIn()
+      removeAllEnemies()
+      removeLink()
+      removeBonus()
     }
   }
 
@@ -103,6 +106,9 @@ function init() {
   function gameLoose() {
     if (lives === 0) {
       looseFadeIn()
+      removeAllEnemies()
+      removeLink()
+      removeBonus()
     }
   }
 
@@ -175,6 +181,11 @@ function init() {
   }
 
   // * Functions for Enemy Movement
+  // Function - Remove Enemies
+  function removeAllEnemies() {
+    cells[enemyPosition].classList.remove('gannon') || cells[enemyPosition].classList.remove('robot')
+  }
+
   // Function - Remove Enemies + 1
   function removeEnemies() {
     enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.remove(randomEnemy))
@@ -236,6 +247,7 @@ function init() {
   document.addEventListener('keyup', handleKeyUp)
 
 
+
   // * Audio
   const playBtn = document.querySelector('#play-btn')
   const audio = document.querySelector('#audio')
@@ -248,7 +260,7 @@ function init() {
   // Audio Listener
   playBtn.addEventListener('click', playSound)
 
-  // * Fade Out
+  // * Intro Fade Out
   const loaderBtn = document.querySelector('#loader-btn')
   const loader = document.querySelector('#loader1')
 
@@ -258,6 +270,7 @@ function init() {
 
   // Fade Out Listner
   loaderBtn.addEventListener('click', fadeOut)
+
 
 
   // * Win Fade In
@@ -270,6 +283,20 @@ function init() {
       winFade.style.opacity = '1'
     }
   }
+
+
+  // * Win Fade Out
+  const winBtn = document.querySelector('#win-btn')
+  const winLoader = document.querySelector('#win1')
+  
+  function winFadeOut() {
+    winBtn.style.opacity = '0'
+  }
+  
+  // Fade Out Listner
+  winLoader.addEventListener('click', winFadeOut)
+
+
 
   // * Loose Fade In
   // Fade In Variable
