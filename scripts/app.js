@@ -1,30 +1,95 @@
 function init() {
 
+
   // * DOM Elements
   const grid = document.querySelector('.grid')
   const start = document.querySelector('#loader-btn')
   const cells = []
 
+
   // * Grid Values
   const width = 10
   const cellCount = width * width
-  const enemyPositions = [10, 20, 30, 40, 50, 60, 70, 80]
+  const enemies = [
+    {
+      name: 'enemy1',
+      speed: 1000,
+      class: 'gannon',
+      timerId: 'enemyTimer1',
+      startingPosition: 10,
+      currentPosition: 10
+    },
+    {
+      name: 'enemy2',
+      speed: 2000,
+      class: 'robot',
+      timerId: 'enemyTimer2',
+      startingPosition: 20,
+      currentPosition: 20
+    },
+    {
+      name: 'enemy3',
+      speed: 1500,
+      class: 'gannon',
+      timerId: 'enemyTimer3',
+      startingPosition: 30,
+      currentPosition: 30
+    },
+    {
+      name: 'enemy4',
+      speed: 2500,
+      class: 'robot',
+      timerId: 'enemyTimer4',
+      startingPosition: 40,
+      currentPosition: 40
+    },
+    {
+      name: 'enemy5',
+      speed: 1000,
+      class: 'gannon',
+      timerId: 'enemyTimer5',
+      startingPosition: 50,
+      currentPosition: 50
+    },
+    {
+      name: 'enemy6',
+      speed: 2000,
+      class: 'robot',
+      timerId: 'enemyTimer6',
+      startingPosition: 60,
+      currentPosition: 60
+    },
+    {
+      name: 'enemy7',
+      speed: 2000,
+      class: 'gannon',
+      timerId: 'enemyTimer3',
+      startingPosition: 70,
+      currentPosition: 70
+    },
+    {
+      name: 'enemy8',
+      speed: 3000,
+      class: 'robot',
+      timerId: 'enemyTimer4',
+      startingPosition: 80,
+      currentPosition: 80
+    }
+  ]
   const levelsDisplay = document.querySelector('#level-display')
   const livesDisplay = document.querySelector('#life-display')
   const pointsDisplay = document.querySelector('#point-display')
 
+
   // * Game Variables
   let linkPosition = 94
   const zeldaPosition = 3
-  let enemyPosition = 0
-  let totalEnemies = 0
-  let randomEnemy = getRandomEnemyName()
   let bonusPosition = 0
   let randomBonus = getRandomBonusName()
   let levels = 1
   let lives = 5
   let points = 0
-  let timer = null
+
 
   // * Functions for charchters, enemies and items
   // Function - Link's Position
@@ -32,6 +97,7 @@ function init() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
+      // cell.innerHTML = i
       grid.appendChild(cell)
     }
     cells[linkPosition].classList.add('link')
@@ -39,7 +105,6 @@ function init() {
 
   // Function - Link's Movement
   function handleKeyUp(event) {
-
     cells[linkPosition].classList.remove('link')
     const x = linkPosition % width
     const y = Math.floor(linkPosition / width)
@@ -94,19 +159,15 @@ function init() {
   function gameWin() {
     if (levels === 6) {
       winFadeIn()
-      // removeAllEnemies()
-      // removeLink()
-      // removeBonus()
+      removeLink()
+      removeBonus()
+      removeAllEnemies()
     }
   }
-
   // Game loose
   function gameLoose() {
     if (lives === 0) {
       looseFadeIn()
-      removeAllEnemies()
-      removeLink()
-      removeBonus()
     }
   }
 
@@ -126,11 +187,6 @@ function init() {
     bonusPosition = Math.floor(Math.random() * 100)
     randomBonus = getRandomBonusName()
     cells[bonusPosition].classList.add(randomBonus)
-  }
-
-  // Function - Add Bonus
-  function addBonus() {
-    cells[bonusPosition].classList.add('bonus')
   }
 
   // Function - Remove Bonus
@@ -155,25 +211,7 @@ function init() {
     lives--
     livesDisplay.innerHTML = lives
   }
-
-  // Function - Restart Points
-  function restartPoints() {
-    points -= points
-    pointsDisplay.innerHTML = points
-  }
-
-  // Function - Restart Level
-  function restartLevel() {
-    levels -= levels
-    levelsDisplay.innerHTML = levels
-  }
-
-  // Function - Restart Level
-  function restartLives() {
-    lives -= lives
-    livesDisplay.innerHTML = lives
-  }
-
+  
   // Function - Has Enemy
   function hasEnemy() {
     return cells[linkPosition].classList.contains('gannon') || cells[linkPosition].classList.contains('robot')
@@ -184,57 +222,65 @@ function init() {
     cells[zeldaPosition].classList.add('zelda')
   }
 
-  // Function - Random Enememy
-  function getRandomEnemyName() {
-    const names = ['gannon', 'robot']
-    return names[Math.floor(Math.random() * names.length)]
-  }
-
   // Function - Random Bonus
   function getRandomBonusName() {
-    const bonusNames = ['bonus']
+    const bonusNames = ['bonus', 'speaker']
     return bonusNames[Math.floor(Math.random() * name.length)]
   }
 
   // * Functions for Enemy Movement
   // Function - Remove Enemies
-  function removeAllEnemies() {
-    clearInterval(timer)
-    removeEnemies()
+  function removeEnemies() {
+    enemies.forEach(enemy => {
+      const position = enemy.currentPosition === enemy.startingPosition + width ? enemy.startingPosition : enemy.currentPosition
+      console.log('position remove', position)
+      console.log('cells position remove', cells[position])
+      cells[position].classList.remove(enemy.class)
+    })
   }
 
-  // Function - Remove Enemies + 1
-  function removeEnemies() {
-    enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.remove(randomEnemy))
+  // Function - Remove ALL Enemies
+  function removeAllEnemies() {
+    cells.forEach(cell => cell.classList.remove('gannon', 'robot'))
   }
 
   // Function - Create Enemies
   function createEnemies() {
-    randomEnemy = getRandomEnemyName()
-    enemyPositions.forEach(enemy => cells[enemyPosition + enemy].classList.add(randomEnemy))
+    enemies.forEach(enemy => {
+      const position = enemy.currentPosition === enemy.startingPosition + width ? enemy.startingPosition : enemy.currentPosition 
+      console.log('position add', position)
+      console.log('cells position add', cells[position])
+      cells[position].classList.add(enemy.class)
+    })
   }
 
-  function moveEnemies() {
-    enemyPosition = 0
-    timer = setInterval(() => {
+  function moveEnemies(enemy) {
+    enemy.currentPosition = enemy.startingPosition
+    enemy.timerId = setInterval(() => {
       removeEnemies()
-      enemyPosition = enemyPosition + 1
+      enemy.currentPosition = enemy.currentPosition + 1
       createEnemies()
-      totalEnemies++
-      console.log('enemyPosition moving', enemyPosition)
-      if (totalEnemies === 10) {
-        clearInterval(timer)
-        totalEnemies = 0
+      if (enemy.currentPosition === (enemy.startingPosition + width)) {
+        console.log('meeting condition')
+        clearInterval(enemy.timerId)
+        // totalEnemies = 0
         cells.forEach(cell => cell.classList.remove('gannon', 'robot'))
-        moveEnemies()
+        moveEnemies(enemy)
       }
-    }, 500)
+    }, enemy.speed)
   }
+
+  // Function - Remove ALL Enemies
+  function removeAllEnemies() {
+    
+  }
+
+
 
   // * Functions for Game Logic
   // Function - Enemy Logics
   function gameLogic() {
-    moveEnemies()
+    enemies.forEach(enemy => moveEnemies(enemy))
     createEnemies()
     randomBonusPosition()
   }
@@ -248,37 +294,34 @@ function init() {
 
 
   // * Audio
-  // Variables
   const playBtn = document.querySelector('#play-btn')
   const audio = document.querySelector('#audio')
-  
-  // Function
   function playSound() {
     audio.src = 'audio/main-theme.mp3'
     audio.play()
   }
 
-  // Listener
+  // Audio Listener
   playBtn.addEventListener('click', playSound)
 
 
 
-  // * Introduction
-  // Variables
+
+
+  // * Intro Fade Out
   const loaderBtn = document.querySelector('#loader-btn')
   const loader = document.querySelector('#loader1')
-
-  // Function
   function fadeOut() {
     loader.style.opacity = '0'
   }
 
-  // Listener
+  // Fade Out Listner
   loaderBtn.addEventListener('click', fadeOut)
 
 
 
-  // * Fade In - Win
+
+// * Fade In - Win
   // Fade In - Variable
   const winFade = document.querySelector('#win1')
 
@@ -286,9 +329,6 @@ function init() {
   function winFadeIn() {
     if (gameWin === gameWin) {
       winFade.style.opacity = '1'
-      removeAllEnemies()
-      removeLink()
-      removeBonus() 
     }
   }
 
@@ -313,12 +353,12 @@ function init() {
   // Fade Out - Function
   function winFadeOut() {
     winLoader.style.opacity = '0'
-    gameLogic()
-    addLink()
-    restartPoints()
-    restartLevel() 
   }
     
+
+
+
+
 
   // * Fade Out - Loose
   // Fade Out - Variable
@@ -334,8 +374,6 @@ function init() {
   console.log(looseFadeOut)
   winLoader.addEventListener('click', winFadeOut)
   looseLoader.addEventListener('click',looseFadeOut)
-
-
 
 
 }
