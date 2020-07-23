@@ -621,3 +621,29 @@ Enemies should appear randomly on the left hand side, and you should have one bo
       cells[zeldaPosition = points += 5000].classList.contains(‘zelda’) 
       // cells[zeldaPosition = levels += 1].classList.contains(‘zelda’)
 ```
+
+# Part 7 - Win/Loose
+### 1. Create this logic to make the item interact 
+
+```
+  // * Winning or loosing function
+  // Game win
+  function gameWin() {
+    if (levels === 6) {
+      winFadeIn()
+      removeAllEnemies()
+      removeLink()
+      removeBonus()
+    }
+  }
+
+  // Game loose
+  function gameLoose() {
+    if (lives === 0) {
+      looseFadeIn()
+      removeAllEnemies()
+      removeLink()
+      removeBonus()
+    }
+  }
+```
