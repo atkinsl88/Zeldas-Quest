@@ -211,6 +211,24 @@ function init() {
     lives--
     livesDisplay.innerHTML = lives
   }
+
+  // Function - Restart Points
+  function restartPoints() {
+    points -= points
+    pointsDisplay.innerHTML = points
+  }
+
+  // Function - Restart Life
+  function restartLife() {
+    lives = 5
+    livesDisplay.innerHTML = lives
+  }
+
+  // Function - Restart Life
+  function levelLife() {
+    levels = 1
+    levelsDisplay.innerHTML = levels
+  }
   
   // Function - Has Enemy
   function hasEnemy() {
@@ -231,7 +249,7 @@ function init() {
   // * Functions for Enemy Movement
   // Function - Remove Enemies
   function removeEnemies() {
-    enemies.forEach(enemy => {
+    enemies.forEach(enemy => {3
       const position = enemy.currentPosition === enemy.startingPosition + width ? enemy.startingPosition : enemy.currentPosition
       console.log('position remove', position)
       console.log('cells position remove', cells[position])
@@ -241,6 +259,7 @@ function init() {
 
   // Function - Remove ALL Enemies
   function removeAllEnemies() {
+    enemies.forEach(enemy => clearInterval(enemy.timerId))
     cells.forEach(cell => cell.classList.remove('gannon', 'robot'))
   }
 
@@ -269,13 +288,6 @@ function init() {
       }
     }, enemy.speed)
   }
-
-  // Function - Remove ALL Enemies
-  function removeAllEnemies() {
-    
-  }
-
-
 
   // * Functions for Game Logic
   // Function - Enemy Logics
@@ -353,12 +365,13 @@ function init() {
   // Fade Out - Function
   function winFadeOut() {
     winLoader.style.opacity = '0'
+    restartPoints()
+    restartLife()
+    levelLife()
+    gameLogic()
+    addLink()
   }
     
-
-
-
-
 
   // * Fade Out - Loose
   // Fade Out - Variable
