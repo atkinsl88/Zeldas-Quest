@@ -10,7 +10,7 @@ Link: http://digilia.co.uk/
 <p>Win - Link joins Zelda on her new quest, to restore Hyrule Kingdom and make it even better than it was before. She sets off to start work on maintaining the Divine Beasts and Guardians so that future generations are ready for the cursed threat that will rise again.</p>
 <p>Loose - Unfortunately you didn’t survive the fight, and perished at the hands of Ganon’s evil. Daruk, Urbosa, Mipha, and Revali all had their spirits sealed within the ancient technology as a mutated being, powered by Ganon’s malice, took their place.</p>
 
-<img src="/assets/link.png" alt="">
+<img src="/assets/screen-shot.jpg" alt="">
 
 ## Controls
 <p>Up, Down, Left and Right</p>
