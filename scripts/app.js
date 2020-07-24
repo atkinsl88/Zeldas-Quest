@@ -352,6 +352,8 @@ function init() {
   function looseFadeIn() {
     if (gameLoose === gameLoose) {
       looseFade.style.opacity = '1'
+      removeLink()
+      removeBonus()
     }
   }
 
