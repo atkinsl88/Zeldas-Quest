@@ -117,7 +117,7 @@ span {
 /* Heading Wrapper */
 
 .heading-wrapper {
-  height: 150px;
+  height: 120px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -139,15 +139,50 @@ span {
 .controls-wrapper {
   height: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 40px;
+  padding-right: 30px;
+  border: 1px solid lightgrey;
+}
+
+.controls-wrapper img {
+  height: 40px;
+  width: 40px;
 }
 
 .controls-wrapper h2 {
-  margin: 30px;
+  margin-left: 30px;
 }
 
+.controls-wrapper p {
+  margin-left: 20px;
+  color: #000000;
+  text-align: left;
+}
+
+.border-bottom {
+  border: 1px solid lightgrey;
+  margin-left: 20px;
+}
+
+.score {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.heros {
+  display: flex;
+}
+
+
+
 /* Grid Layout */
+
+.wrapper-container {
+  display: flex;
+  justify-content: center;
+}
 
 .grid-wrapper {
   height: auto;
