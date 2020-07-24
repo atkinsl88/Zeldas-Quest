@@ -10,6 +10,8 @@ body {
   background-color: #F9F9F3;
 }
 
+/* Fonts */
+
 p {
   font-family: 'Cinzel', serif;
   font-weight: 400;
@@ -176,7 +178,6 @@ span {
 }
 
 
-
 /* Grid Layout */
 
 .wrapper-container {
@@ -258,7 +259,7 @@ span {
   position: fixed;
   z-index: 99;
   top: 19%;
-  left: 37%;
+  left: 33%;
   width: 660px;
   height: 40%;
   background-color: #B99B66;
@@ -303,7 +304,7 @@ span {
   position: fixed;
   z-index: 99;
   top: 19%;
-  left: 37%;
+  left: 33%;
   width: 660px;
   height: 40%;
   background-color: #722f4b;
