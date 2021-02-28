@@ -1,6 +1,5 @@
 # Zelda's Quest
 
-Project Name: Project One</br>
 Description: JavaScript based 'Frogger' game.</br>
 Author: Liam Atkins</br>
 Link: https://zeldas-quest.netlify.app/
